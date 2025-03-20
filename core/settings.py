@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
 	'rest_framework',
+    'api.apps.ApiConfig',
     'frontend.apps.FrontendConfig',
     'django_cleanup.apps.CleanupConfig'
 ]
