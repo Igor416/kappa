@@ -34,7 +34,7 @@ class Product(models.Model):
   image = models.ImageField('Фотография', upload_to='products/')
   
   def __str__(self):
-    return f'{self.get_brand_display()} {self.name}'
+    return f'{self.get_brand_display()} {self.name_en}'
   
   class Meta:
     ordering = ['brand', 'category', 'name_en']
