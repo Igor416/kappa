@@ -2,8 +2,9 @@ from rest_framework import generics, status
 from rest_framework.views import APIView, Response
 import os
 from django.core.files import File
+import json
 
-from api.models import Category, Product
+from api.models import Brand, Category, Product
 from api.serializers import ProductSerializer
 
 class ProductsView(generics.ListAPIView):
@@ -11,15 +12,12 @@ class ProductsView(generics.ListAPIView):
   serializer_class = ProductSerializer
   
   def get(self, request, brand='', *args, **kwargs):
-    qs = self.queryset.filter(brand=brand)
+    qs = self.queryset.filter(category__brand__name=brand)
     serializer = self.serializer_class(qs, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 class WorkerView(APIView):
   def get(self, request, *args, **kwargs):
-    for p in Product.objects.all():
-      p.name_ro = p.name_en
-      p.save()
     return Response()
   
   def parse_images(self):
