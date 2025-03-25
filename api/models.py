@@ -31,7 +31,7 @@ class Category(models.Model):
   order = models.SmallIntegerField('Порядок', default=1)
   
   def __str__(self):
-    return f'{self.brand} {self.name_en}'
+    return f'{self.brand} {self.name_en} ({self.order})'
   
   class Meta:
     ordering = ['brand', 'order']
@@ -47,9 +47,9 @@ class Product(models.Model):
   order = models.SmallIntegerField('Порядок', default=1)
   
   def __str__(self):
-    return f'{self.category.brand} {self.name_en}'
+    return f'{self.category.brand} {self.name_en} ({self.order})'
   
   class Meta:
-    ordering = ['category', 'name_en', 'order']
+    ordering = ['category', 'order']
     verbose_name = 'Товар'
     verbose_name_plural = 'Товары'
