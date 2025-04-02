@@ -1,0 +1,33 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+  <h1>Внести изменения</h1>
+  <h2>Правила:</h2>
+  <ul>
+    <li>
+      <h3>Можно изменять только текст после знака ":" - это тот текст который показывается на сайте. Все остальное - код</h3>
+    </li>
+    <li>
+      <h3>Символ \n означает переход на следующую строку</h3>
+    </li>
+    <li>
+      <h3>Символ \" позволяет поставить кавычки - его надо использовать только внутри текстового блока</h3>
+    </li>
+  </ul>
+  <br>
+  <form method="post" style="display:flex; flex-direction:column; align-items:center; gap:32px; width:100%:">
+    {% csrf_token %}
+    <input type="hidden" name="ns" required id="id_ns" value="{{ns}}" />
+    <div style="display:flex; width:100%; gap:32px">
+      <textarea style="flex:1; font-size:20px" rows="18" name="content_en" required id="id_content_en">{{form.initial.content_en}}</textarea>
+      <textarea style="flex:1; font-size:20px" rows="18" name="content_ro" required id="id_content_ro">{{form.initial.content_ro}}</textarea>
+    </div>
+    <div class="submit-row">
+      <input type="submit" value="Сохранить" class="default" name="_save">
+    </div>
+  </form>
+  <br>
+  
+  <a href="{% url 'admin:list_translations' %}">
+    <h2>Назад</h2>
+  </a>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+  <h1>Заменить фото</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>Выберите картинку на замену</p>
+    <input type="hidden" name="photo_name" required id="id_photo_name" />
+    <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 32px">
+      {% for choice in choices %}
+      <div class="image-choice" style="width: 10%; padding: 2px; transition: 0.5s; display: flex; flex-direction: column;">
+        <img src="/static/assets/{{choice}}">
+        <h6>{{choice}}</h6>
+      </div>
+      {% endfor %}
+    </div>
+    <br>
+    <input type="file" name="new_photo" accept="image/*" required id="id_new_photo">
+    <br>
+    <br>
+    <br>
+    <div class="submit-row">
+      <input type="submit" value="Сохранить" class="default" name="_save">
+    </div>
+  </form>
+  <script>
+    let active = -1;
+    const imageChoices = document.getElementsByClassName('image-choice')
+    console.log(imageChoices)
+    const input = document.getElementById('id_photo_name')
+    const pick = (i) => {
+      imageChoices[i].style.border = '1px solid black'
+      if (active > -1) {
+        imageChoices[active].style.border = 'none'
+      }
+      active = i
+      input.value = imageChoices[i].getElementsByTagName('h6')[0].innerText.replace('/static/assets/', '')
+    }
+    for (let i = 0; i < imageChoices.length; i++) {
+      imageChoices[i].addEventListener('click', () => pick(i));
+    }
+  </script>
+{% endblock %}

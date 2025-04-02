@@ -24,6 +24,8 @@ INSTALLED_APPS = [
 	'rest_framework',
     'api.apps.ApiConfig',
     'frontend.apps.FrontendConfig',
+    'i18n.apps.I18NConfig',
+    'photos.apps.PhotosConfig',
     'django_cleanup.apps.CleanupConfig'
 ]
 

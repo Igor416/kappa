@@ -1,0 +1,13 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+  <h1>Выберите часть страницы</h1>
+  <ul>
+    {% for namespace in namespaces %}
+    <li>
+      <a href="{% url 'admin:edit_translation' ns=namespace %}">
+        <h2>{{namespace}}</h2>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
